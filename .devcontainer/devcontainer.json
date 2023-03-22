@@ -21,7 +21,8 @@
 				"Vue.volar",
 				"esbenp.prettier-vscode",
 				"ritwickdey.LiveServer",
-				"k--kato.intellij-idea-keybindings"
+				"k--kato.intellij-idea-keybindings",
+				"sdras.vue-vscode-snippets"
 			]
 		}
 	},
