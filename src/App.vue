@@ -1,9 +1,9 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <HelloWorld msg="Vite + Vue" />
+    <Table></Table>
 </template>
+
+<script setup>
+import Table from './components/Table.vue'
+</script>
 
 <style scoped></style>
