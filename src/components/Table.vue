@@ -1,7 +1,6 @@
 <template>
     <div>
-        <el-button type="primary" @click="replaceTableData">Fetch Table Data</el-button>
-        <el-table :data="tableData">
+        <el-table :data="state.users">
             <el-table-column prop="id" label="Id"></el-table-column>
             <el-table-column prop="name" label="Name"></el-table-column>
             <el-table-column prop="age" label="Age"></el-table-column>
@@ -21,31 +20,16 @@
   
 <script setup>
 import { useTableStore } from '../store/table.js'
+import { onMounted, reactive, ref } from 'vue'
+
+const state = reactive({
+    users: []
+});
 
 const tableStore = useTableStore();
 
-const tableData = tableStore.tableData;
-
-const replaceTableData = () => {
-    const newTableData = [
-        {
-            id: 1,
-            name: "John Doe",
-            age: 23,
-            gender: "女",
-            address: "上海",
-            email: "john@example.com",
-        },
-        {
-            id: 2,
-            name: "John Doe",
-            age: 23,
-            gender: "女",
-            address: "上海",
-            email: "john@example.com",
-        },
-    ];
-    tableStore.replaceTableData(newTableData);
+const fetchTableData = () => {
+    state.users = tableStore.tableData;
 }
 
 const addData = (row) => {
@@ -67,5 +51,10 @@ const updateById = (row) => {
     }
     tableStore.updateById(row.id, data);
 }
+
+onMounted(async () => {
+    fetchTableData();
+})
+
 </script>
   
