@@ -1,9 +1,9 @@
 <template>
-    <Table></Table>
+    <div>
+        <router-view></router-view>
+    </div>
 </template>
-
 <script setup>
-import Table from './components/Table.vue'
 </script>
-
 <style scoped></style>
+  
