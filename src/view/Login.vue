@@ -45,7 +45,7 @@ import router from "../router/index";
 import { useLoginUserStore } from "../store/login";
 
 const form = reactive({
-  username: "tony1",
+  username: "红砖",
   password: "123456",
 });
 
@@ -66,6 +66,9 @@ const onSubmit = async () => {
       console.log("res is: " + res.data.data)
       if (res.data) {
         if (res.data.success) {
+          loginUserStore.storeLoginInfoToLocal(res.data.data.username, res.data.data.password);
+          loginUserStore.loginUser.username = res.data.data.username;
+          loginUserStore.loginUser.pasword = res.data.data.password;
           router.push("/home");
         } else {
           ElMessage.error(res.data.message);

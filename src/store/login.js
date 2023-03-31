@@ -11,12 +11,12 @@ export const useLoginUserStore = defineStore({
   }),
   actions: {
     async login(formData) {
-      const response = await userApi.login(formData);
-
-      this.loginUser.username = response.data.data.username;
-      this.loginUser.username = response.data.data.password;
-
-      return response;
+      const res = await userApi.login(formData);
+      return res;
+    },
+    storeLoginInfoToLocal(username, password) {
+      sessionStorage.setItem("username", username);
+      sessionStorage.setItem("password", password);
     },
   },
 });

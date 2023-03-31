@@ -10,7 +10,7 @@
                     <el-col :offset="12" :span="8" style="min-width: 150px">
                         <el-dropdown style="float: right; margin: 20px 10px">
                             <span class="el-dropdown-link" style="color: #fff; cursor: pointer">
-                                红砖 &nbsp;&nbsp; <el-icon class="el-icon--right">
+                                {{ username }} &nbsp;&nbsp; <el-icon class="el-icon--right">
                                     <arrow-down />
                                 </el-icon>
                             </span>
@@ -72,16 +72,20 @@
     </div>
 </template>
 <script setup>
-import { onBeforeMount, ref } from 'vue';
+import { onBeforeMount, onMounted, ref } from 'vue';
 import avatar from "../assets/img/avator.jpg"
 import { useRouter } from 'vue-router'
 const router = useRouter();
+
+const username = ref(sessionStorage.getItem("username"));
+
 // 挂载 DOM 之前
 onBeforeMount(() => {
     activePath.value = sessionStorage.getItem("activePath")
         ? sessionStorage.getItem("activePath")
         : "/index"
 })
+
 let isCollapse = ref(false);
 let activePath = ref("");
 // 保存链接的激活状态
