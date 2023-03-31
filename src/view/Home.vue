@@ -5,12 +5,12 @@
             <el-header>
                 <el-row>
                     <el-col :span="4">
-                        <p class="system-name">知否课堂后台管理系统</p>
+                        <p class="system-name">红砖的网站</p>
                     </el-col>
                     <el-col :offset="12" :span="8" style="min-width: 150px">
                         <el-dropdown style="float: right; margin: 20px 10px">
                             <span class="el-dropdown-link" style="color: #fff; cursor: pointer">
-                                知否君 &nbsp;&nbsp; <el-icon class="el-icon--right">
+                                红砖 &nbsp;&nbsp; <el-icon class="el-icon--right">
                                     <arrow-down />
                                 </el-icon>
                             </span>
@@ -65,7 +65,7 @@
                         <!-- 主要内容 -->
                         <router-view></router-view>
                     </el-main>
-                    <el-footer>Copyright © 2022 知否技术</el-footer>
+                    <el-footer>Copyright © 2022 红砖</el-footer>
                 </el-container>
             </el-container>
         </el-container>

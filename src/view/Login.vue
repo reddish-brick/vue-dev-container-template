@@ -9,7 +9,7 @@
             </el-icon>
           </p>
           <p style="float: left;font-size: 25px; font-weight: bold">
-            欢迎来到知否在线课堂
+            欢迎来到我的网站
           </p>
         </div>
 
@@ -31,23 +31,25 @@
         </el-card>
       </el-main>
       <el-footer>
-        <p>关于我们 | 联系我们 | 人才招聘 | 广告服务 | 友情链接 | 知否社区 | 知否公益</p>
-        <p>Copyright © 2001-2022 <el-tag>公众号：知否技术</el-tag></p>
+        <p>关于我们 | 联系我们 | 人才招聘 | 广告服务 | 友情链接</p>
+        <p>Copyright © 2001-2022 <el-tag>公众号：红砖</el-tag></p>
       </el-footer>
     </el-container>
   </div>
 </template>
 
 <script setup>
-import userApi from "../api/user";
-import { reactive, ref, getCurrentInstance } from "vue";
+import { reactive, ref } from "vue";
 import { ElMessage } from "element-plus";
 import router from "../router/index";
+import { useLoginUserStore } from "../store/login";
 
 const form = reactive({
   username: "tony1",
   password: "123456",
 });
+
+const loginUserStore = useLoginUserStore();
 
 const ruleFormRef = ref();
 
@@ -56,11 +58,11 @@ const rules = reactive({
   password: [{ required: true, message: "密码不能为空", trigger: "blur" }],
 });
 
-const onSubmit = () => {
+const onSubmit = async () => {
   if (!ruleFormRef) return;
   ruleFormRef.value.validate(async (valid) => {
     if (valid) {
-      const res = await userApi.login(form);
+      const res = await loginUserStore.login(form);
       console.log("res is: " + res.data.data)
       if (res.data) {
         if (res.data.success) {
