@@ -15,10 +15,10 @@
                     {{ userDetail.age }}
                 </el-form-item>
                 <el-form-item label="电话号码:">
-                    {{ userDetail.age }}
+                    {{ userDetail.phoneNumber }}
                 </el-form-item>
                 <el-form-item label="地址:">
-                    {{ userDetail.age }}
+                    {{ userDetail.address }}
                 </el-form-item>
             </el-form>
         </el-card>
