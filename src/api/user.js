@@ -20,10 +20,15 @@ const getUserDetail = (data) => {
   return http.get("/user/detail", data);
 };
 
+const updateUserDetailById = (data) => {
+  return http.post("/user/detail", data);
+};
+
 export default {
   login,
   getUserList,
   saveUser,
   delUser,
   getUserDetail,
+  updateUserDetailById,
 };
