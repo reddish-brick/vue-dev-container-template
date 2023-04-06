@@ -1,14 +1,3 @@
-/*
- *  Copyright (c) 2022 Caterpillar Inc. All Rights Reserved.
- *
- *  This work contains Caterpillar Inc.'s unpublished
- *  proprietary information which may constitute a trade secret
- *  and/or be confidential. This work may be used only for the
- *  purposes for which it was provided, and may not be copied
- *  or disclosed to others. Copyright notice is precautionary
- *  only, and does not imply publication.
- */
-
 package com.example.mockserver.controller;
 
 import com.example.mockserver.dto.DtoWrapper;
@@ -64,10 +53,12 @@ public class UserController {
   public DtoWrapper<UserDto> login(@RequestBody UserDto userDto) {
     UserDto loginUser = list.stream()
         .filter(
-            user -> Objects.equals(userDto.getUsername(), user.getUsername()) && Objects.equals(userDto.getPassword(), user.getPassword()))
+            user -> Objects.equals(userDto.getUsername(), user.getUsername())
+                && Objects.equals(userDto.getPassword(), user.getPassword()))
         .findAny().get();
 
-    return DtoWrapper.<UserDto>builder().code(HttpStatus.OK.value()).data(loginUser).success(true).message("成功返回").build();
+    return DtoWrapper.<UserDto>builder().code(HttpStatus.OK.value()).data(loginUser).success(true).message("成功返回")
+        .build();
   }
 
   @GetMapping(value = "/detail")
@@ -76,7 +67,8 @@ public class UserController {
         .filter(user -> Objects.equals(id, user.getId()))
         .findAny().get();
 
-    return DtoWrapper.<UserDto>builder().code(HttpStatus.OK.value()).data(userDto).success(true).message("成功返回").build();
+    return DtoWrapper.<UserDto>builder().code(HttpStatus.OK.value()).data(userDto).success(true).message("成功返回")
+        .build();
   }
 
   @DeleteMapping(value = "/delete")
@@ -88,20 +80,20 @@ public class UserController {
   @PostMapping(value = "/detail")
   public DtoWrapper<UserDto> detail(@RequestBody UserDto userDto) {
     list.replaceAll(user -> {
-          if (Objects.equals(userDto.getId(), user.getId())) {
-            UserDto build = UserDto.builder()
-                .address(userDto.getAddress())
-                .phoneNumber(userDto.getPhoneNumber())
-                .age(userDto.getAge())
-                .username(userDto.getUsername())
-                .password(userDto.getPassword())
-                .id(userDto.getId())
-                .build();
-            return build;
-          }
-          return user;
-        }
-    );
-    return DtoWrapper.<UserDto>builder().code(HttpStatus.OK.value()).data(userDto).success(true).message("修改成功").build();
+      if (Objects.equals(userDto.getId(), user.getId())) {
+        UserDto build = UserDto.builder()
+            .address(userDto.getAddress())
+            .phoneNumber(userDto.getPhoneNumber())
+            .age(userDto.getAge())
+            .username(userDto.getUsername())
+            .password(userDto.getPassword())
+            .id(userDto.getId())
+            .build();
+        return build;
+      }
+      return user;
+    });
+    return DtoWrapper.<UserDto>builder().code(HttpStatus.OK.value()).data(userDto).success(true).message("修改成功")
+        .build();
   }
 }
