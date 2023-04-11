@@ -6,36 +6,26 @@
             "request": "launch",
             "name": "vuejs: msedge",
             "url": "http://localhost:3000",
-            "webRoot": "${workspaceFolder}",
+            "webRoot": "${workspaceFolder}/src",
             "pathMapping": {
                 "/_karma_webpack_": "${workspaceFolder}"
             },
             "sourceMapPathOverrides": {
-                "webpack:/*": "${webRoot}/*",
-                "/./*": "${webRoot}/*",
-                "/src/*": "${webRoot}/*",
-                "/*": "*",
-                "/./~/*": "${webRoot}/node_modules/*"
-            },
-            "preLaunchTask": "vuejs: start"
+                "webpack:///src/*": "${webRoot}/*"
+            }
         },
         {
             "type": "chrome",
             "request": "launch",
             "name": "vuejs: chrome",
             "url": "http://localhost:3000",
-            "webRoot": "${workspaceFolder}",
+            "webRoot": "${workspaceFolder}/src",
             "pathMapping": {
                 "/_karma_webpack_": "${workspaceFolder}"
             },
             "sourceMapPathOverrides": {
-                "webpack:/*": "${webRoot}/*",
-                "/./*": "${webRoot}/*",
-                "/src/*": "${webRoot}/*",
-                "/*": "*",
-                "/./~/*": "${webRoot}/node_modules/*"
-            },
-            "preLaunchTask": "vuejs: start"
+                "webpack:///src/*": "${webRoot}/*"
+            }
         }
     ]
 }
