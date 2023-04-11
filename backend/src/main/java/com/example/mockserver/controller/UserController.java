@@ -61,6 +61,14 @@ public class UserController {
         .build();
   }
 
+  @PostMapping(value = "/save")
+  public DtoWrapper<UserDto> save(@RequestBody UserDto userDto) {
+    list.add(userDto);
+
+    return DtoWrapper.<UserDto>builder().code(HttpStatus.OK.value()).data(userDto).success(true).message("增加成功")
+        .build();
+  }
+
   @GetMapping(value = "/detail")
   public DtoWrapper<UserDto> detail(@RequestParam Integer id) {
     UserDto userDto = list.stream()

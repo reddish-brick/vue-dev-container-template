@@ -3,7 +3,7 @@
         <el-card class="box-card">
             <template #header>
                 <div class="card-header">
-                    <span>用户详情</span>
+                    <span>{{ route.meta.title }}</span>
                     <el-button size="mini" style="float:right" @click="router.go(-1)">返回</el-button>
                 </div>
             </template>
@@ -22,7 +22,7 @@
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="onSubmit()">修 改</el-button>
+                <el-button type="primary" @click="onSubmit()">{{ route.query.id ? "修 改" : "增 加" }}</el-button>
             </span>
         </el-card>
     </div>
@@ -44,9 +44,12 @@ const form = reactive({
     address: ''
 })
 
+const id = ref('');
+
 onBeforeMount(async () => {
-    if (route.query.id) {
-        const res = await userApi.getUserDetail({ id: route.query.id })
+    id.value = route.query.id;
+    if (id.value !== undefined) {
+        const res = await userApi.getUserDetail({ id: id.value })
         Object.assign(form, res.data.data);
     }
 })
@@ -76,14 +79,22 @@ const onSubmit = async () => {
     ruleFormRef.value.validate(async (valid) => {
         if (valid) {
             const formData = {
-                id: route.query.id,
+                id: id.value,
                 username: form.username,
                 password: form.password,
                 age: form.age,
                 address: form.address,
                 phoneNumber: form.phoneNumber
             }
-            const res = await userApi.updateUserDetailById(formData);
+
+            let res = null;
+            if (id.value != undefined) {
+                res = await userApi.updateUserDetailById(formData);
+            } else {
+                res = await userApi.saveUser(formData);
+            }
+
+
             if (res.data) {
                 if (res.data.success) {
                     router.push("/user/list");

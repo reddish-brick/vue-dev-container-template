@@ -42,6 +42,13 @@ const routes = [
         },
         component: () => import("../view/user/Detail.vue"),
       },
+      {
+        path: "/user/add",
+        meta: {
+          title: "增加用户",
+        },
+        component: () => import("../view/user/Detail.vue"),
+      },
     ],
   },
 ];
