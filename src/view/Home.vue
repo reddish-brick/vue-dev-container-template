@@ -35,13 +35,27 @@
                         </el-icon>
                     </div>
                     <el-menu router :default-active="activePath" class="el-menu-vertical-demo" :collapse="isCollapse">
-                        <el-menu-item index="/index" @click="saveActiveNav('/index')">
-                            <el-icon>
-                                <house />
-                            </el-icon>
-                            <span>首页</span>
-                        </el-menu-item>
                         <el-sub-menu index="1">
+                          <template #title>
+                            <span>首页</span>
+                          </template>
+                          <el-menu-item-group>
+                            <el-menu-item index="/index" @click="saveActiveNav('/index')">
+                              <el-icon>
+                                <house />
+                              </el-icon>
+                              <span>首页</span>
+                            </el-menu-item>
+                            <el-menu-item index="/user/list" @click="saveActiveNav('/user/list')">
+                              <el-icon>
+                                <user />
+                              </el-icon>
+                              <span>用户管理</span>
+                            </el-menu-item>
+                          </el-menu-item-group>
+                        </el-sub-menu>
+
+                        <el-sub-menu index="2">
                           <template #title>
                             <span>首页配置</span>
                           </template>
@@ -52,12 +66,7 @@
 <!--                            <el-menu-item index="/recommend"><el-icon><ShoppingCart /></el-icon>为你推荐配置</el-menu-item>-->
                           </el-menu-item-group>
                         </el-sub-menu>
-                        <el-menu-item index="/user/list" @click="saveActiveNav('/user/list')">
-                            <el-icon>
-                                <user />
-                            </el-icon>
-                            <span>用户管理</span>
-                        </el-menu-item>
+
                     </el-menu>
                 </el-aside>
                 <el-container>

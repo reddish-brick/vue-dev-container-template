@@ -40,15 +40,15 @@
 import {onMounted, reactive, ref} from 'vue'
 import {ElMessage} from 'element-plus'
 import {Delete, Plus} from '@element-plus/icons-vue'
-import axiosInstance from '../utils/http/axios'
-import DialogAddSwiper from '../components/DialogAddSwiper.vue'
+import axiosInstance from '../../utils/http/axios.js'
+import DialogAddSwiper from './DialogAddSwiper.vue'
 
 const addSwiper = ref()
 const state = reactive({
   loading: false,
   tableData: [], // 数据列表
   currentPage: 1,
-  pageSize: 10,
+  pageSize: 3,
   type: 'add', // 操作类型,
   multipleSelection: [], // 选中项
   total: 0, // 总条数

@@ -53,7 +53,7 @@ const routes = [
             {
                 path: '/swiper',
                 name: 'swiper',
-                component: () => import("../view/Swiper.vue")
+                component: () => import("../view/swiper/Swiper.vue")
             }
         ],
     },

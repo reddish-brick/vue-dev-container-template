@@ -42,8 +42,8 @@
 
 <script setup>
 import {reactive, ref} from 'vue'
-import axiosInstance from '../utils/http/axios'
-import {localGet, uploadImgServer} from '../utils'
+import axiosInstance from '../../utils/http/axios.js'
+import {localGet, uploadImgServer} from '../../utils/index.js'
 import {ElMessage} from 'element-plus'
 
 const props = defineProps({
