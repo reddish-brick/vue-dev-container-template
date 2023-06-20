@@ -10,10 +10,10 @@ export default defineConfig({
   },
   server: {
     // open: false,
-    port: 3000,
+    port: 3001,
     proxy: {
       "/api": {
-        target: "http://127.0.0.1:8080", // target 是后台接口地址
+        target: "http://127.0.0.1:28019", // target 是后台接口地址
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""), // api 就是 axios 实例的 baseURL 属性
       },
