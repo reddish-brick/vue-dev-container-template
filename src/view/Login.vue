@@ -63,15 +63,15 @@ const onSubmit = async () => {
   ruleFormRef.value.validate(async (valid) => {
     if (valid) {
       const res = await loginUserStore.login(form);
-      console.log("res is: " + res.data.data)
-      if (res.data) {
-        if (res.data.success) {
-          loginUserStore.storeLoginInfoToLocal(res.data.data.username, res.data.data.password);
-          loginUserStore.loginUser.username = res.data.data.username;
-          loginUserStore.loginUser.pasword = res.data.data.password;
+      console.log("res is: " + res)
+      if (res) {
+        if (res.success) {
+          loginUserStore.storeLoginInfoToLocal(res.data.username, res.data.password);
+          loginUserStore.loginUser.username = res.data.username;
+          loginUserStore.loginUser.pasword = res.data.password;
           router.push("/home");
         } else {
-          ElMessage.error(res.data.message);
+          ElMessage.error(res.message);
         }
       } else {
         ElMessage.error("服务器内部错误");

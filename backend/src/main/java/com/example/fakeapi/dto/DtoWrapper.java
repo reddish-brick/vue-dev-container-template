@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DtoWrapper<T> {
 
-  private Integer code;
+  private Integer resultCode;
   private String message;
   private T data;
   private Integer total;

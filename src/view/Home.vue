@@ -42,13 +42,15 @@
                             <span>首页</span>
                         </el-menu-item>
                         <el-sub-menu index="1">
-                            <template #title>
-                                <el-icon>
-                                    <Setting />
-                                </el-icon>
-                                <span>系统设置</span>
-                            </template>
-                            <el-menu-item index="2-1">权限管理</el-menu-item>
+                          <template #title>
+                            <span>首页配置</span>
+                          </template>
+                          <el-menu-item-group>
+                            <el-menu-item index="/swiper"><el-icon><Picture /></el-icon>轮播图配置</el-menu-item>
+<!--                            <el-menu-item index="/hot"><el-icon><StarFilled /></el-icon>热销商品配置</el-menu-item>-->
+<!--                            <el-menu-item index="/new"><el-icon><Sell /></el-icon>新品上线配置</el-menu-item>-->
+<!--                            <el-menu-item index="/recommend"><el-icon><ShoppingCart /></el-icon>为你推荐配置</el-menu-item>-->
+                          </el-menu-item-group>
                         </el-sub-menu>
                         <el-menu-item index="/user/list" @click="saveActiveNav('/user/list')">
                             <el-icon>

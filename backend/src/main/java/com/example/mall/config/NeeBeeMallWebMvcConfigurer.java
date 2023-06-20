@@ -33,8 +33,8 @@ public class NeeBeeMallWebMvcConfigurer extends WebMvcConfigurationSupport {
      * @tip @TokenToMallUser @TokenToAdminUser 注解处理方法
      */
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        argumentResolvers.add(tokenToMallUserMethodArgumentResolver);
-        argumentResolvers.add(tokenToAdminUserMethodArgumentResolver);
+//        argumentResolvers.add(tokenToMallUserMethodArgumentResolver);
+//        argumentResolvers.add(tokenToAdminUserMethodArgumentResolver);
     }
 
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

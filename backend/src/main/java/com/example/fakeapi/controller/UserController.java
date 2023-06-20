@@ -20,7 +20,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/manage-api/v1/user")
 @RequiredArgsConstructor
 @Slf4j
 @Validated
@@ -42,7 +42,7 @@ public class UserController {
     int endIndex = Math.min(startIndex + size, users.size());
 
     return DtoWrapper.<List<UserDto>>builder()
-        .code(HttpStatus.OK.value())
+        .resultCode(HttpStatus.OK.value())
         .success(true)
         .data(users.subList(startIndex, endIndex))
         .total(users.size())
@@ -57,7 +57,7 @@ public class UserController {
                 && Objects.equals(userDto.getPassword(), user.getPassword()))
         .findAny().get();
 
-    return DtoWrapper.<UserDto>builder().code(HttpStatus.OK.value()).data(loginUser).success(true).message("成功返回")
+    return DtoWrapper.<UserDto>builder().resultCode(HttpStatus.OK.value()).data(loginUser).success(true).message("成功返回")
         .build();
   }
 
@@ -65,7 +65,7 @@ public class UserController {
   public DtoWrapper<UserDto> save(@RequestBody UserDto userDto) {
     list.add(userDto);
 
-    return DtoWrapper.<UserDto>builder().code(HttpStatus.OK.value()).data(userDto).success(true).message("增加成功")
+    return DtoWrapper.<UserDto>builder().resultCode(HttpStatus.OK.value()).data(userDto).success(true).message("增加成功")
         .build();
   }
 
@@ -75,14 +75,14 @@ public class UserController {
         .filter(user -> Objects.equals(id, user.getId()))
         .findAny().get();
 
-    return DtoWrapper.<UserDto>builder().code(HttpStatus.OK.value()).data(userDto).success(true).message("成功返回")
+    return DtoWrapper.<UserDto>builder().resultCode(HttpStatus.OK.value()).data(userDto).success(true).message("成功返回")
         .build();
   }
 
   @DeleteMapping(value = "/delete")
   public DtoWrapper<UserDto> deleteById(@RequestParam Integer id) {
     list.removeIf(userDto -> userDto.getId().equals(id));
-    return DtoWrapper.<UserDto>builder().code(HttpStatus.OK.value()).success(true).message("删除成功").build();
+    return DtoWrapper.<UserDto>builder().resultCode(HttpStatus.OK.value()).success(true).message("删除成功").build();
   }
 
   @PostMapping(value = "/detail")
@@ -101,7 +101,7 @@ public class UserController {
       }
       return user;
     });
-    return DtoWrapper.<UserDto>builder().code(HttpStatus.OK.value()).data(userDto).success(true).message("修改成功")
+    return DtoWrapper.<UserDto>builder().resultCode(HttpStatus.OK.value()).data(userDto).success(true).message("修改成功")
         .build();
   }
 }

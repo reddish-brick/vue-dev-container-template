@@ -50,7 +50,7 @@ onBeforeMount(async () => {
     id.value = route.query.id;
     if (id.value !== undefined) {
         const res = await userApi.getUserDetail({ id: id.value })
-        Object.assign(form, res.data.data);
+        Object.assign(form, res.data);
     }
 })
 
@@ -95,11 +95,11 @@ const onSubmit = async () => {
             }
 
 
-            if (res.data) {
-                if (res.data.success) {
+            if (res) {
+                if (res.success) {
                     router.push("/user/list");
                 } else {
-                    ElMessage.error(res.data.message);
+                    ElMessage.error(res.message);
                 }
             } else {
                 ElMessage.error("服务器内部错误");

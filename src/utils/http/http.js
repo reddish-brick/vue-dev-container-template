@@ -1,13 +1,13 @@
-import instance from "./axios";
+import axiosInstance from "./axios";
 
 // 主要用来封装各种请求
 const post = (url, data) => {
   console.log(url);
   return new Promise((resolve, reject) => {
-    instance
+    axiosInstance
       .post(url, data)
       .then((res) => {
-        console.log(instance.getUri);
+        console.log(axiosInstance.getUri);
         resolve(res);
       })
       .catch((err) => {
@@ -18,7 +18,7 @@ const post = (url, data) => {
 
 const get = (url, data) => {
   return new Promise((resolve, reject) => {
-    instance
+    axiosInstance
       .get(url, { params: data })
       .then((res) => {
         resolve(res);
@@ -31,7 +31,7 @@ const get = (url, data) => {
 
 const put = (url, data) => {
   return new Promise((resolve, reject) => {
-    instance
+    axiosInstance
       .put(url, data)
       .then((res) => {
         resolve(res);
@@ -44,7 +44,7 @@ const put = (url, data) => {
 
 const del = (url, data) => {
   return new Promise((resolve, reject) => {
-    instance
+    axiosInstance
       .delete(url, { params: data })
       .then((res) => {
         resolve(res);

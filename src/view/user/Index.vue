@@ -63,8 +63,8 @@ const searchForm = reactive({
 const getUserList = async () => {
     const res = await userApi.getUserList(searchForm);
     console.log(res);
-    tableData.value = res.data.data;
-    total.value = res.data.total;
+    tableData.value = res.data;
+    total.value = res.total;
 }
 
 const handleSizeChange = (size) => {
@@ -95,7 +95,7 @@ const deleteUser = (id) => {
         }
     ).then(async () => {
         const res = await userApi.delUser({ id: id });
-        if (res.data.success) {
+        if (res.success) {
             ElMessage.success("删除成功")
             getUserList();
         } else {
