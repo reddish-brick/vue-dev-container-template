@@ -62,7 +62,7 @@ public class NewBeeAdminGoodsCategoryAPI {
                        @RequestParam(required = false) @ApiParam(value = "分类级别") Integer categoryLevel,
                        @RequestParam(required = false) @ApiParam(value = "上级分类的id") Long parentId, @TokenToAdminUser AdminUserToken adminUser) {
         logger.info("adminUser:{}", adminUser.toString());
-        if (pageNumber == null || pageNumber < 1 || pageSize == null || pageSize < 10 || categoryLevel == null || categoryLevel < 0 || categoryLevel > 3 || parentId == null || parentId < 0) {
+        if (pageNumber == null || pageNumber < 1 || pageSize == null || pageSize < 1 || categoryLevel == null || categoryLevel < 0 || categoryLevel > 3 || parentId == null || parentId < 0) {
             return ResultGenerator.genFailResult("分页参数异常！");
         }
         Map params = new HashMap(8);

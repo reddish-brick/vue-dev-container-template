@@ -74,6 +74,20 @@
                             </el-menu-item-group>
                         </el-sub-menu>
 
+                        <el-sub-menu index="2">
+                          <template #title>
+                            <span>模块管理</span>
+                          </template>
+                          <el-menu-item-group>
+                            <el-menu-item index="/category">
+                              <el-icon>
+                                <Menu/>
+                              </el-icon>
+                              分类管理
+                            </el-menu-item>
+                          </el-menu-item-group>
+                        </el-sub-menu>
+
                     </el-menu>
                 </el-aside>
                 <el-container>
@@ -90,9 +104,9 @@
     </div>
 </template>
 <script setup>
-import { onBeforeMount, ref } from 'vue';
+import {onBeforeMount, ref} from 'vue';
 import avatar from "../assets/img/avator.jpg"
-import { useRouter } from 'vue-router'
+import {useRouter} from 'vue-router'
 
 const router = useRouter();
 
