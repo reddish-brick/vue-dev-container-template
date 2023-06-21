@@ -53,6 +53,9 @@ const routes = [
       {
         path: '/swiper',
         name: 'swiper',
+        meta: {
+          title: '轮播图配置',
+        },
         component: () => import('../view/swiper/Swiper.vue'),
       },
     ],
