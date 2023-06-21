@@ -36,35 +36,37 @@
                     </div>
                     <el-menu router :default-active="activePath" class="el-menu-vertical-demo" :collapse="isCollapse">
                         <el-sub-menu index="1">
-                          <template #title>
-                            <span>首页</span>
-                          </template>
-                          <el-menu-item-group>
-                            <el-menu-item index="/index" @click="saveActiveNav('/index')">
-                              <el-icon>
-                                <house />
-                              </el-icon>
-                              <span>首页</span>
-                            </el-menu-item>
-                            <el-menu-item index="/user/list" @click="saveActiveNav('/user/list')">
-                              <el-icon>
-                                <user />
-                              </el-icon>
-                              <span>用户管理</span>
-                            </el-menu-item>
-                          </el-menu-item-group>
+                            <template #title>
+                                <span>首页</span>
+                            </template>
+                            <el-menu-item-group>
+                                <el-menu-item index="/welcome" @click="saveActiveNav('/welcome')">
+                                    <el-icon>
+                                        <house />
+                                    </el-icon>
+                                    <span>Welcome</span>
+                                </el-menu-item>
+                                <el-menu-item index="/user/list" @click="saveActiveNav('/user/list')">
+                                    <el-icon>
+                                        <user />
+                                    </el-icon>
+                                    <span>用户管理</span>
+                                </el-menu-item>
+                            </el-menu-item-group>
                         </el-sub-menu>
 
                         <el-sub-menu index="2">
-                          <template #title>
-                            <span>首页配置</span>
-                          </template>
-                          <el-menu-item-group>
-                            <el-menu-item index="/swiper"><el-icon><Picture /></el-icon>轮播图配置</el-menu-item>
-<!--                            <el-menu-item index="/hot"><el-icon><StarFilled /></el-icon>热销商品配置</el-menu-item>-->
-<!--                            <el-menu-item index="/new"><el-icon><Sell /></el-icon>新品上线配置</el-menu-item>-->
-<!--                            <el-menu-item index="/recommend"><el-icon><ShoppingCart /></el-icon>为你推荐配置</el-menu-item>-->
-                          </el-menu-item-group>
+                            <template #title>
+                                <span>首页配置</span>
+                            </template>
+                            <el-menu-item-group>
+                                <el-menu-item index="/swiper"><el-icon>
+                                        <Picture />
+                                    </el-icon>轮播图配置</el-menu-item>
+                                <!--                            <el-menu-item index="/hot"><el-icon><StarFilled /></el-icon>热销商品配置</el-menu-item>-->
+                                <!--                            <el-menu-item index="/new"><el-icon><Sell /></el-icon>新品上线配置</el-menu-item>-->
+                                <!--                            <el-menu-item index="/recommend"><el-icon><ShoppingCart /></el-icon>为你推荐配置</el-menu-item>-->
+                            </el-menu-item-group>
                         </el-sub-menu>
 
                     </el-menu>
@@ -94,7 +96,7 @@ const username = ref(sessionStorage.getItem("username"));
 onBeforeMount(() => {
     activePath.value = sessionStorage.getItem("activePath")
         ? sessionStorage.getItem("activePath")
-        : "/index"
+        : "/welcome"
 })
 
 let isCollapse = ref(false);
