@@ -40,7 +40,7 @@
 import {onMounted, reactive, ref} from 'vue'
 import {ElMessage} from 'element-plus'
 import {Delete, Plus} from '@element-plus/icons-vue'
-import axiosInstance from '../../utils/http/axios.js'
+import axiosInstance from '../../../utils/http/axios.js'
 import DialogAddSwiper from './DialogAddSwiper.vue'
 
 const addSwiper = ref()

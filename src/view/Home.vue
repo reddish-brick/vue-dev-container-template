@@ -60,11 +60,16 @@
                                 <span>首页配置</span>
                             </template>
                             <el-menu-item-group>
-                                <el-menu-item index="/swiper"><el-icon>
+                                <el-menu-item index="/swiper">
+                                    <el-icon>
                                         <Picture />
-                                    </el-icon>轮播图配置</el-menu-item>
+                                    </el-icon>
+                                    轮播图配置
+                                </el-menu-item>
+                                <el-menu-item index="/new"><el-icon>
+                                        <Sell />
+                                    </el-icon>新品上线配置</el-menu-item>
                                 <!--                            <el-menu-item index="/hot"><el-icon><StarFilled /></el-icon>热销商品配置</el-menu-item>-->
-                                <!--                            <el-menu-item index="/new"><el-icon><Sell /></el-icon>新品上线配置</el-menu-item>-->
                                 <!--                            <el-menu-item index="/recommend"><el-icon><ShoppingCart /></el-icon>为你推荐配置</el-menu-item>-->
                             </el-menu-item-group>
                         </el-sub-menu>
@@ -85,9 +90,10 @@
     </div>
 </template>
 <script setup>
-import { onBeforeMount, onMounted, ref } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import avatar from "../assets/img/avator.jpg"
 import { useRouter } from 'vue-router'
+
 const router = useRouter();
 
 const username = ref(sessionStorage.getItem("username"));

@@ -56,8 +56,16 @@ const routes = [
         meta: {
           title: '轮播图配置',
         },
-        component: () => import('../view/swiper/Swiper.vue'),
+        component: () => import('../view/config/swiper/Swiper.vue'),
       },
+      {
+        path: '/new',
+        name: 'new',
+        meta: {
+          title: '热销商品配置',
+        },
+        component: () => import('../view/config/product/IndexConfig.vue')
+      }
     ],
   },
 ];

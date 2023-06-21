@@ -58,7 +58,7 @@ public class NewBeeAdminIndexConfigAPI {
                        @RequestParam(required = false) @ApiParam(value = "每页条数") Integer pageSize,
                        @RequestParam(required = false) @ApiParam(value = "1-搜索框热搜 2-搜索下拉框热搜 3-(首页)热销商品 4-(首页)新品上线 5-(首页)为你推荐") Integer configType, @TokenToAdminUser AdminUserToken adminUser) {
         logger.info("adminUser:{}", adminUser.toString());
-        if (pageNumber == null || pageNumber < 1 || pageSize == null || pageSize < 10) {
+        if (pageNumber == null || pageNumber < 1 || pageSize == null || pageSize < 1) {
             return ResultGenerator.genFailResult("分页参数异常！");
         }
         IndexConfigTypeEnum indexConfigTypeEnum = IndexConfigTypeEnum.getIndexConfigTypeEnumByType(configType);
