@@ -5,7 +5,7 @@
         <div style="width:400px">
           <p style="float: left;">
             <el-icon color="#409EFF" :size="50">
-              <ElementPlus />
+              <ElementPlus/>
             </el-icon>
           </p>
           <p style="float: left;font-size: 25px; font-weight: bold">
@@ -18,10 +18,10 @@
         <el-card class="login_card">
           <el-form :model="form" :rules="rules" ref="ruleFormRef" label-width="80px">
             <el-form-item label="账号：" prop="username">
-              <el-input v-model="form.username" placeholder="请输入账号" />
+              <el-input v-model="form.username" placeholder="请输入账号"/>
             </el-form-item>
             <el-form-item label="密码：" prop="password">
-              <el-input type="password" placeholder="请输入密码" v-model="form.password" />
+              <el-input type="password" placeholder="请输入密码" v-model="form.password"/>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="onSubmit()">登录</el-button>
@@ -32,43 +32,55 @@
       </el-main>
       <el-footer>
         <p>关于我们 | 联系我们 | 人才招聘 | 广告服务 | 友情链接</p>
-        <p>Copyright © 2001-2022 <el-tag>公众号：红砖</el-tag></p>
+        <p>Copyright © 2001-2022
+          <el-tag>公众号：红砖</el-tag>
+        </p>
       </el-footer>
     </el-container>
   </div>
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
-import { ElMessage } from "element-plus";
+import {reactive, ref} from "vue";
+import {ElMessage} from "element-plus";
 import router from "../router/index";
-import { useLoginUserStore } from "../store/login";
+import md5 from 'js-md5'
+import {useAdminUserStore} from "../store/login";
 
 const form = reactive({
-  username: "红砖",
+  username: "admin",
   password: "123456",
 });
 
-const loginUserStore = useLoginUserStore();
+const adminUserStore = useAdminUserStore();
 
 const ruleFormRef = ref();
 
 const rules = reactive({
-  username: [{ required: true, message: "账号不能为空", trigger: "blur" }],
-  password: [{ required: true, message: "密码不能为空", trigger: "blur" }],
+  username: [{required: true, message: "账号不能为空", trigger: "blur"}],
+  password: [{required: true, message: "密码不能为空", trigger: "blur"}],
 });
 
 const onSubmit = async () => {
   if (!ruleFormRef) return;
   ruleFormRef.value.validate(async (valid) => {
     if (valid) {
-      const res = await loginUserStore.login(form);
+      const res = await adminUserStore.login({
+        userName: form.username || '',
+        passwordMd5: md5(form.password)
+      });
       console.log("res is: " + res)
       if (res) {
-        if (res.success) {
-          loginUserStore.storeLoginInfoToLocal(res.data.username, res.data.password);
-          loginUserStore.loginUser.username = res.data.username;
-          loginUserStore.loginUser.pasword = res.data.password;
+        if (res.resultCode === 200) {
+          console.log(res.data)
+          const adminUserInfo = splitAdminUserInfo(res.data);
+          let adminUserId = adminUserInfo[1];
+          let adminUserName = adminUserInfo[2];
+          let adminPassword = adminUserInfo[3];
+          adminUserStore.storeLoginInfoToLocal(adminUserId, adminUserName, adminPassword);
+          adminUserStore.adminLoginUser.userId = adminUserId;
+          adminUserStore.adminLoginUser.username = adminUserName;
+          adminUserStore.adminLoginUser.pasword = adminPassword;
           router.push("/home");
         } else {
           ElMessage.error(res.message);
@@ -81,6 +93,10 @@ const onSubmit = async () => {
     }
   });
 };
+
+const splitAdminUserInfo = (data) => {
+  return data.split(" ");
+}
 
 const resetForm = () => {
   if (!ruleFormRef) return;

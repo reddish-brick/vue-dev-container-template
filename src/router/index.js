@@ -122,6 +122,14 @@ const routes = [
                     title: '会员管理',
                 },
                 component: () => import( '../view/moduleManage/member/Member.vue')
+            },
+            {
+                path: '/account',
+                name: 'account',
+                meta: {
+                    title: '账户信息编辑',
+                },
+                component: () => import('../view/systemManage/Account.vue')
             }
         ],
     },
