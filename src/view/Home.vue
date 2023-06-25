@@ -93,7 +93,7 @@
                             </el-menu-item>
                             <el-menu-item index="/member">
                               <el-icon>
-                                <Member/>
+                                <User/>
                               </el-icon>
                               会员管理
                             </el-menu-item>
@@ -105,6 +105,20 @@
                             </el-menu-item>
                           </el-menu-item-group>
                         </el-sub-menu>
+
+                      <el-sub-menu index="3">
+                        <template #title>
+                          <span>系统管理</span>
+                        </template>
+                        <el-menu-item-group>
+                          <el-menu-item index="/account">
+                            <el-icon>
+                              <Lock/>
+                            </el-icon>
+                            修改密码
+                          </el-menu-item>
+                        </el-menu-item-group>
+                      </el-sub-menu>
 
                     </el-menu>
                 </el-aside>
@@ -125,6 +139,7 @@
 import {onBeforeMount, ref} from 'vue';
 import avatar from "../assets/img/avator.jpg"
 import {useRouter} from 'vue-router'
+import {User} from "@element-plus/icons-vue";
 
 const router = useRouter();
 
