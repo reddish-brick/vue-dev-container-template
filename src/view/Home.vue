@@ -83,13 +83,13 @@
                   </el-icon>
                   新品上线配置
                 </el-menu-item>
-                <el-menu-item index="/hot">
+                <el-menu-item index="/hot" @click="saveActiveNav('/hot')">
                   <el-icon>
                     <StarFilled/>
                   </el-icon>
                   热销商品配置
                 </el-menu-item>
-                <el-menu-item index="/recommend">
+                <el-menu-item index="/recommend" @click="saveActiveNav('/recommend')">
                   <el-icon>
                     <ShoppingCart/>
                   </el-icon>
@@ -98,7 +98,7 @@
               </el-menu-item-group>
             </el-sub-menu>
 
-            <el-sub-menu index="2">
+            <el-sub-menu index="3">
               <template #title>
                 <span>模块管理</span>
               </template>
@@ -130,7 +130,7 @@
               </el-menu-item-group>
             </el-sub-menu>
 
-            <el-sub-menu index="3">
+            <el-sub-menu index="4">
               <template #title>
                 <span>系统管理</span>
               </template>
