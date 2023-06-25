@@ -85,6 +85,12 @@
                               </el-icon>
                               分类管理
                             </el-menu-item>
+                            <el-menu-item index="/order">
+                              <el-icon>
+                                <List/>
+                              </el-icon>
+                              订单管理
+                            </el-menu-item>
                           </el-menu-item-group>
                         </el-sub-menu>
 

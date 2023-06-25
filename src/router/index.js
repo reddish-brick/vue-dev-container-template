@@ -82,6 +82,22 @@ const routes = [
                         component: () => import( '../view/moduleManage/category/Category.vue'),
                     }
                 ]
+            },
+            {
+                path: '/order',
+                name: 'order',
+                meta: {
+                    title: '订单管理',
+                },
+                component: () => import('../view/moduleManage/order/Order.vue')
+            },
+            {
+                path: '/order_detail',
+                name: 'order_detail',
+                meta: {
+                    title: '订单详情',
+                },
+                component: () => import( '../view/moduleManage/order/OrderDetail.vue')
             }
         ],
     },

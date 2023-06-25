@@ -55,7 +55,7 @@ public class NewBeeAdminOrderAPI {
                        @RequestParam(required = false) @ApiParam(value = "订单号") String orderNo,
                        @RequestParam(required = false) @ApiParam(value = "订单状态") Integer orderStatus, @TokenToAdminUser AdminUserToken adminUser) {
         logger.info("adminUser:{}", adminUser.toString());
-        if (pageNumber == null || pageNumber < 1 || pageSize == null || pageSize < 10) {
+        if (pageNumber == null || pageNumber < 1 || pageSize == null || pageSize < 1) {
             return ResultGenerator.genFailResult("分页参数异常！");
         }
         Map params = new HashMap(8);
