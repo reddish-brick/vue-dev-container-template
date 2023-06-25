@@ -23,15 +23,7 @@
       </el-table-column>
       <el-table-column prop="orderStatus" label="订单状态">
         <template #default="scope">
-          <!--          <span>{{ $filters.orderMap(scope.row.orderStatus) }}</span>-->
-          <span v-if="scope.row.orderStatus == 0">待支付</span>
-          <span v-if="scope.row.orderStatus == 1">已支付</span>
-          <span v-else-if="scope.row.orderStatus == 2">配货完成</span>
-          <span v-else-if="scope.row.orderStatus == 3">出库成功</span>
-          <span v-else-if="scope.row.orderStatus == 4">交易成功</span>
-          <span v-else-if="scope.row.orderStatus == -1">手动关闭</span>
-          <span v-else-if="scope.row.orderStatus == -2">超时关闭</span>
-          <span v-else-if="scope.row.orderStatus == -3">商家关闭</span>
+          <span>{{ $filters.orderMap(scope.row.orderStatus) }}</span>
         </template>
       </el-table-column>
       <el-table-column prop="payType" label="支付方式">

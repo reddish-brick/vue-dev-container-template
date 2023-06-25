@@ -173,7 +173,7 @@ onMounted(() => {
         sellingPrice: goods.sellingPrice,
         stockNum: goods.stockNum,
         goodsSellStatus: String(goods.goodsSellStatus),
-        goodsCoverImg: goods.goodsCoverImg,
+        goodsCoverImg: proxy.$filters.prefix(goods.goodsCoverImg),
         tag: goods.tag
       }
       state.categoryId = goods.goodsCategoryId
