@@ -24,8 +24,10 @@
               <el-input type="password" placeholder="请输入密码" v-model="form.password"/>
             </el-form-item>
             <el-form-item>
+              <div style="color: #333">登录表示您已同意<a>《服务条款》</a></div>
               <el-button type="primary" @click="onSubmit()">登录</el-button>
               <el-button type="primary" @click="resetForm()">重置</el-button>
+              <el-checkbox v-model="form.checked" @change="!form.checked">下次自动登录</el-checkbox>
             </el-form-item>
           </el-form>
         </el-card>
@@ -50,6 +52,7 @@ import {useAdminUserStore} from "../store/login";
 const form = reactive({
   username: "admin",
   password: "123456",
+  checked: true
 });
 
 const adminUserStore = useAdminUserStore();
@@ -125,7 +128,7 @@ const resetForm = () => {
   margin: 100px 200px;
   width: 20%;
   min-width: 300px;
-  height: 200px;
+  height: 250px;
   border-radius: 10px;
 }
 

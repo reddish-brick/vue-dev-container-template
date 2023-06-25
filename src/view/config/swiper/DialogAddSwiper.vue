@@ -82,16 +82,18 @@ const getDetail = (id) => {
   })
 }
 const handleBeforeUpload = (file) => {
-  const sufix = file.name.split('.')[1] || ''
-  if (!['jpg', 'jpeg', 'png'].includes(sufix)) {
+  const suffix = file.name.split('.')[1] || ''
+  if (!['jpg', 'jpeg', 'png'].includes(suffix)) {
     ElMessage.error('请上传 jpg、jpeg、png 格式的图片')
     return false
   }
 }
+
 // 上传图片
 const handleUrlSuccess = (val) => {
   state.ruleForm.url = val.data || ''
 }
+
 // 开启弹窗
 const open = (id) => {
   state.visible = true
@@ -106,10 +108,12 @@ const open = (id) => {
     }
   }
 }
+
 // 关闭弹窗
 const close = () => {
   state.visible = false
 }
+
 const submitForm = () => {
   console.log(formRef.value.validate)
   formRef.value.validate((valid) => {

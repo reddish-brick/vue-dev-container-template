@@ -50,6 +50,13 @@
                   </el-icon>
                   <span>Welcome</span>
                 </el-menu-item>
+                <el-menu-item index="/add_good" @click="saveActiveNav('/add_good')">
+                  <el-icon>
+                    <Plus/>
+                  </el-icon>
+                  添加商品
+                </el-menu-item>
+
                 <el-menu-item index="/user/list" @click="saveActiveNav('/user/list')">
                   <el-icon>
                     <user/>

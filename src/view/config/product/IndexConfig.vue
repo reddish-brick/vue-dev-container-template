@@ -58,16 +58,14 @@
       </el-table-column>
       <el-table-column
           label="操作"
-          width="100"
-      >
+          width="100">
         <template #default="scope">
           <a style="cursor: pointer; margin-right: 10px" @click="handleEdit(scope.row.configId)">修改</a>
           <el-popconfirm
               title="确定删除吗？"
               confirmButtonText='确定'
               cancelButtonText='取消'
-              @confirm="handleDeleteOne(scope.row.configId)"
-          >
+              @confirm="handleDeleteOne(scope.row.configId)">
             <template #reference>
               <a style="cursor: pointer">删除</a>
             </template>
@@ -76,14 +74,10 @@
       </el-table-column>
     </el-table>
     <!--总数超过一页，再展示分页器-->
-    <el-pagination
-        background
-        layout="prev, pager, next"
-        :total="state.total"
-        :page-size="state.pageSize"
-        :current-page="state.currentPage"
-        @current-change="changePage"
-    />
+    <el-pagination background style="margin-top:20px" :current-page="state.currentPage" :page-size="state.pageSize"
+                   :page-sizes="[3, 5, 10, 20]" layout="->,total, sizes, prev, pager, next, jumper"
+                   :total="state.total"
+                   @size-change="sizePage" @current-change="changePage"/>
   </el-card>
   <DialogAddGood ref='addGood' :reload="getIndexConfig" :type="state.type" :configType="state.configType"/>
 </template>
@@ -139,6 +133,7 @@ const getIndexConfig = () => {
       configType: state.configType
     }
   }).then(res => {
+    console.log(res.data)
     state.tableData = res.data.list
     state.total = res.data.totalCount
     state.currentPage = res.data.currPage
@@ -166,21 +161,32 @@ const handleDelete = () => {
     return
   }
   axiosInstance.delete('/indexConfigs', {
-    ids: state.multipleSelection.map(i => i.configId)
+    data: {
+      ids: state.multipleSelection.map(i => i.configId)
+    }
   }).then(() => {
     ElMessage.success('删除成功')
     getIndexConfig()
   })
 }
+
 // 单个删除
 const handleDeleteOne = (id) => {
   axiosInstance.delete('/indexConfigs', {
-    ids: [id]
+    data: {
+      ids: [id]
+    }
   }).then(() => {
     ElMessage.success('删除成功')
     getIndexConfig()
   })
 }
+
+const sizePage = (val) => {
+  state.pageSize = val;
+  getIndexConfig();
+}
+
 const changePage = (val) => {
   state.currentPage = val
   getIndexConfig()
