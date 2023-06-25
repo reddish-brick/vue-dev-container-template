@@ -114,6 +114,14 @@ const routes = [
                     title: '增加商品',
                 },
                 component: () => import('../view/moduleManage/goods/AddGood.vue')
+            },
+            {
+                path: '/member',
+                name: 'member',
+                meta: {
+                    title: '会员管理',
+                },
+                component: () => import( '../view/moduleManage/member/Member.vue')
             }
         ],
     },

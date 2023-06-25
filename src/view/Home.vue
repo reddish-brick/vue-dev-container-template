@@ -91,6 +91,12 @@
                               </el-icon>
                               商品管理
                             </el-menu-item>
+                            <el-menu-item index="/member">
+                              <el-icon>
+                                <Member/>
+                              </el-icon>
+                              会员管理
+                            </el-menu-item>
                             <el-menu-item index="/order">
                               <el-icon>
                                 <List/>
