@@ -106,10 +106,11 @@ const state = reactive({
   multipleSelection: [], // 选中项
   total: 0, // 总条数
   currentPage: 1, // 当前页
-  pageSize: 3, // 分页大小
+  pageSize: 5, // 分页大小
   type: 'add', // 操作类型
   configType: 3 // 3-(首页)热销商品 4-(首页)新品上线 5-(首页)为你推荐
 })
+
 // 监听路由变化
 router.beforeEach((to) => {
   if (['hot', 'new', 'recommend'].includes(to.name)) {
@@ -118,6 +119,7 @@ router.beforeEach((to) => {
     getIndexConfig()
   }
 })
+
 // 初始化
 onMounted(() => {
   state.configType = configTypeMap[route.name]
@@ -140,16 +142,19 @@ const getIndexConfig = () => {
     state.loading = false
   })
 }
+
 // 添加商品
 const handleAdd = () => {
   state.type = 'add'
   addGood.value.open()
 }
+
 // 修改商品
 const handleEdit = (id) => {
   state.type = 'edit'
   addGood.value.open(id)
 }
+
 // 选择项
 const handleSelectionChange = (val) => {
   state.multipleSelection = val

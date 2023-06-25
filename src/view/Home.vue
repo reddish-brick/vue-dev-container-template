@@ -83,8 +83,18 @@
                   </el-icon>
                   新品上线配置
                 </el-menu-item>
-                <!--                            <el-menu-item index="/hot"><el-icon><StarFilled /></el-icon>热销商品配置</el-menu-item>-->
-                <!--                            <el-menu-item index="/recommend"><el-icon><ShoppingCart /></el-icon>为你推荐配置</el-menu-item>-->
+                <el-menu-item index="/hot">
+                  <el-icon>
+                    <StarFilled/>
+                  </el-icon>
+                  热销商品配置
+                </el-menu-item>
+                <el-menu-item index="/recommend">
+                  <el-icon>
+                    <ShoppingCart/>
+                  </el-icon>
+                  为你推荐配置
+                </el-menu-item>
               </el-menu-item-group>
             </el-sub-menu>
 

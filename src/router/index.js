@@ -62,6 +62,22 @@ const routes = [
                 path: '/new',
                 name: 'new',
                 meta: {
+                    title: '新品上线配置',
+                },
+                component: () => import('../view/config/product/IndexConfig.vue')
+            },
+            {
+                path: '/recommend',
+                name: 'recommend',
+                meta: {
+                    title: '为你推荐配置',
+                },
+                component: () => import('../view/config/product/IndexConfig.vue')
+            },
+            {
+                path: '/hot',
+                name: 'hot',
+                meta: {
                     title: '热销商品配置',
                 },
                 component: () => import('../view/config/product/IndexConfig.vue')
