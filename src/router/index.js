@@ -3,7 +3,7 @@ import {createRouter, createWebHashHistory} from 'vue-router';
 const routes = [
     {
         path: '/',
-        redirect: '/login',
+        redirect: '/home',
     },
     {
         path: '/login',
@@ -69,6 +69,9 @@ const routes = [
             {
                 path: '/category',
                 name: 'category',
+                meta: {
+                    title: '分类管理',
+                },
                 component: () => import( '../view/moduleManage/category/Category.vue'),
                 children: [
                     {
@@ -127,9 +130,9 @@ const routes = [
                 path: '/account',
                 name: 'account',
                 meta: {
-                    title: '账户信息编辑',
+                    title: '修改密码',
                 },
-                component: () => import('../view/systemManage/Account.vue')
+                component: () => import('../view/systemManage/modifyPassword/Account.vue')
             }
         ],
     },
@@ -138,6 +141,7 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes,
 });
+
 // 挂载路由导航守卫：to表示将要访问的路径，from表示从哪里来，next是下一个要做的操作
 router.beforeEach((to, from, next) => {
     // 修改页面 title
@@ -149,12 +153,13 @@ router.beforeEach((to, from, next) => {
         return next();
     }
     // 获取token
-    // const token= sessionStorage.getItem('token')
-    // if (!token) {
-    //   return next('/login')
-    // } else {
-    //   next()
-    // }
+    const token = sessionStorage.getItem('userId')
+    console.log(token)
+    if (!token) {
+        return next('/login')
+    } else {
+        next()
+    }
     return next();
 });
 

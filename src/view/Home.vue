@@ -34,7 +34,11 @@
               <Fold v-if="!isCollapse"/>
             </el-icon>
           </div>
-          <el-menu router :default-active="activePath" class="el-menu-vertical-demo" :collapse="isCollapse">
+          <el-menu class="el-menu-vertical-demo"
+                   :router="true"
+                   :collapse="isCollapse"
+                   :default-active="activePath"
+                   :default-openeds="defaultOpen">
             <el-sub-menu index="1">
               <template #title>
                 <span>首页</span>
@@ -60,13 +64,13 @@
                 <span>首页配置</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="/swiper">
+                <el-menu-item index="/swiper" @click="saveActiveNav('/swiper')">
                   <el-icon>
                     <Picture/>
                   </el-icon>
                   轮播图配置
                 </el-menu-item>
-                <el-menu-item index="/new">
+                <el-menu-item index="/new" @click="saveActiveNav('/new')">
                   <el-icon>
                     <Sell/>
                   </el-icon>
@@ -82,25 +86,25 @@
                 <span>模块管理</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="/category">
+                <el-menu-item index="/category" @click="saveActiveNav('/category')">
                   <el-icon>
                     <Menu/>
                   </el-icon>
                   分类管理
                 </el-menu-item>
-                <el-menu-item index="/good">
+                <el-menu-item index="/good" @click="saveActiveNav('/good')">
                   <el-icon>
                     <Goods/>
                   </el-icon>
                   商品管理
                 </el-menu-item>
-                <el-menu-item index="/member">
+                <el-menu-item index="/member" @click="saveActiveNav('/member')">
                   <el-icon>
                     <User/>
                   </el-icon>
                   会员管理
                 </el-menu-item>
-                <el-menu-item index="/order">
+                <el-menu-item index="/order" @click="saveActiveNav('/order')">
                   <el-icon>
                     <List/>
                   </el-icon>
@@ -114,7 +118,7 @@
                 <span>系统管理</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="/account">
+                <el-menu-item index="/account" @click="saveActiveNav('/account')">
                   <el-icon>
                     <Lock/>
                   </el-icon>
@@ -158,13 +162,17 @@ onBeforeMount(() => {
       : "/welcome"
 })
 
+
 let isCollapse = ref(false);
-let activePath = ref("");
+let activePath = ref("/");
+let defaultOpen = reactive(['1', '2', '3', '4'])
+
 // 保存链接的激活状态
 const saveActiveNav = (path) => {
   sessionStorage.setItem("activePath", path);
   activePath.value = path;
 }
+
 const logout = () => {
   // 清除缓存
   sessionStorage.clear();

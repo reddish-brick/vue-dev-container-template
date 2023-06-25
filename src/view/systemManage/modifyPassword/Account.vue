@@ -31,7 +31,7 @@
 
 <script setup>
 import {onMounted, reactive, ref} from 'vue'
-import axiosInstance from '../../utils/http/axios.js'
+import axiosInstance from '../../../utils/http/axios.js'
 import {ElMessage} from 'element-plus'
 import md5 from 'js-md5'
 
@@ -64,7 +64,7 @@ const state = reactive({
 })
 
 onMounted(() => {
-  const adminUserId = sessionStorage.getItem("usrId");
+  const adminUserId = sessionStorage.getItem("userId");
   axiosInstance.get('/adminUser/profile/' + adminUserId).then(res => {
     state.user = res.data
     state.nameForm.loginName = res.data.loginUserName
@@ -75,7 +75,7 @@ onMounted(() => {
 const submitName = () => {
   nameRef.value.validate((vaild) => {
     if (vaild) {
-      const adminUserId = sessionStorage.getItem("usrId");
+      const adminUserId = sessionStorage.getItem("userId");
 
       axiosInstance.put('/adminUser/' + adminUserId + '/name', {
         loginUserName: state.nameForm.loginName,
@@ -91,7 +91,7 @@ const submitName = () => {
 const submitPass = () => {
   passRef.value.validate((vaild) => {
     if (vaild) {
-      const adminUserId = sessionStorage.getItem("usrId");
+      const adminUserId = sessionStorage.getItem("userId");
 
       axiosInstance.put('/adminUser/' + adminUserId + '/password', {
         originalPassword: md5(state.passForm.oldpass),

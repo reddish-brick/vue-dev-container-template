@@ -16,7 +16,7 @@ export const useAdminUserStore = defineStore({
             return res;
         },
         storeLoginInfoToLocal(userId, username, password) {
-            sessionStorage.setItem("usrId", userId);
+            sessionStorage.setItem("userId", userId);
             sessionStorage.setItem("username", username);
             sessionStorage.setItem("password", password);
         },
