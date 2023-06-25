@@ -98,6 +98,22 @@ const routes = [
                     title: '订单详情',
                 },
                 component: () => import( '../view/moduleManage/order/OrderDetail.vue')
+            },
+            {
+                path: '/good',
+                name: 'good',
+                meta: {
+                    title: '商品管理',
+                },
+                component: () => import( '../view/moduleManage/goods/Good.vue')
+            },
+            {
+                path: '/add_good',
+                name: 'add_good',
+                meta: {
+                    title: '增加商品',
+                },
+                component: () => import('../view/moduleManage/goods/AddGood.vue')
             }
         ],
     },
