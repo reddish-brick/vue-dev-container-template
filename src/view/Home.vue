@@ -50,13 +50,18 @@
                   </el-icon>
                   <span>Welcome</span>
                 </el-menu-item>
+                <el-menu-item index="/dashboard" @click="saveActiveNav('/dashboard')">
+                  <el-icon>
+                    <odometer/>
+                  </el-icon>
+                  <span>统计图</span>
+                </el-menu-item>
                 <el-menu-item index="/add_good" @click="saveActiveNav('/add_good')">
                   <el-icon>
                     <Plus/>
                   </el-icon>
                   添加商品
                 </el-menu-item>
-
                 <el-menu-item index="/user/list" @click="saveActiveNav('/user/list')">
                   <el-icon>
                     <user/>
@@ -163,7 +168,7 @@
 import {onBeforeMount, ref} from 'vue';
 import avatar from "../assets/img/avator.jpg"
 import {useRouter} from 'vue-router'
-import {User} from "@element-plus/icons-vue";
+import {Odometer, User} from "@element-plus/icons-vue";
 import {useAdminUserStore} from "../store/login";
 
 const router = useRouter();

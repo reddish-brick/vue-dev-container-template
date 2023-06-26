@@ -27,28 +27,35 @@ const routes = [
                 meta: {
                     title: '首页',
                 },
-                component: () => import('../view/welcome/Welcome.vue'),
+                component: () => import('../view/dashboard/welcome/Welcome.vue'),
+            },
+            {
+                path: '/dashboard',
+                meta: {
+                    title: '统计图',
+                },
+                component: () => import('../view/dashboard/statisticGraph/Chart.vue'),
             },
             {
                 path: '/user/list',
                 meta: {
                     title: '用户管理',
                 },
-                component: () => import('../view/user/Index.vue'),
+                component: () => import('../view/dashboard/user/Index.vue'),
             },
             {
                 path: '/user/detail',
                 meta: {
                     title: '用户详情',
                 },
-                component: () => import('../view/user/Detail.vue'),
+                component: () => import('../view/dashboard/user/Detail.vue'),
             },
             {
                 path: '/user/add',
                 meta: {
                     title: '增加用户',
                 },
-                component: () => import('../view/user/Detail.vue'),
+                component: () => import('../view/dashboard/user/Detail.vue'),
             },
             {
                 path: '/swiper',

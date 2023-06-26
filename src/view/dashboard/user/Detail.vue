@@ -31,7 +31,7 @@
 <script setup>
 import { onBeforeMount, reactive, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import userApi from "../../api/user";
+import userApi from "../../../api/user.js";
 
 const route = useRoute();
 const router = useRouter();
