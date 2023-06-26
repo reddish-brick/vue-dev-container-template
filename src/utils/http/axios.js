@@ -2,7 +2,6 @@ import axios from "axios";
 import {ElMessage} from "element-plus";
 import router from '../../router/index'
 import {localGet} from '../index'
-import config from '../../../config'
 
 // 主要用来创建 axios 实例、拦截请求和响应
 
@@ -12,7 +11,7 @@ const axiosInstance = axios.create({});
 // 超时时间
 axiosInstance.defaults.timeout = 50000
 // 这边由于后端没有区分测试和正式，姑且都写成一个接口。
-axiosInstance.defaults.baseURL = config[import.meta.env.MODE].baseUrl
+axiosInstance.defaults.baseURL = import.meta.env.VITE_API_BASE_URL
 // 携带 cookie，对目前的项目没有什么作用，因为我们是 token 鉴权
 axiosInstance.defaults.withCredentials = true
 // 请求头，headers 信息

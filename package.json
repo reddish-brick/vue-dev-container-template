@@ -4,9 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev:local": "vite --mode _local",
+    "dev:development": "vite --mode development",
+    "dev:staging": "vite --mode staging",
+    "dev:production": "vite --mode production",
+    "build:local": "vite build --mode _local",
+    "build:development": "vite build --mode development",
+    "build:staging": "vite build --mode staging",
+    "build:production": "vite build --mode production",
+    "preview": "vite preview --port 3000"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
