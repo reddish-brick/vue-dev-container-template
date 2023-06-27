@@ -154,6 +154,7 @@ const handleEdit = (id) => {
   state.type = 'edit'
   addCate.value.open(id)
 }
+
 // 选择项
 const handleSelectionChange = (val) => {
   state.multipleSelection = val

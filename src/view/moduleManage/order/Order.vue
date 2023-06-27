@@ -37,25 +37,22 @@
       </el-table-column>
       <el-table-column label="操作">
         <template #default="scope">
-          <el-popconfirm v-if="scope.row.orderStatus == 1" title="确定配货完成吗？"
-                         @confirm="handleConfig(scope.row.orderId)" confirm-button-text="确定" cancel-button-text="取消">
-            <template #reference>
-              <a style="cursor: pointer; margin-right: 10px">配货完成</a>
-            </template>
-          </el-popconfirm>
-          <el-popconfirm v-if="scope.row.orderStatus == 2" title="确定出库吗？" @confirm="handleSend(scope.row.orderId)"
-                         confirm-button-text="确定" cancel-button-text="取消">
-            <template #reference>
-              <a style="cursor: pointer; margin-right: 10px">出库</a>
-            </template>
-          </el-popconfirm>
-          <el-popconfirm v-if="!(scope.row.orderStatus == 4 || scope.row.orderStatus < 0)" title="确定关闭订单吗？"
-                         @confirm="handleClose(scope.row.orderId)" confirm-button-text="确定" cancel-button-text="取消">
-            <template #reference>
-              <a style="cursor: pointer; margin-right: 10px">关闭订单</a>
-            </template>
-          </el-popconfirm>
-          <router-link :to="{ path: '/order_detail', query: { id: scope.row.orderId } }">订单详情</router-link>
+          <el-button v-if="scope.row.orderStatus == 1" title="确定配货完成吗？" link type="danger"
+                     size="small" @click="handleConfig(scope.row.orderId)">配货完成
+          </el-button>
+
+          <el-button v-if="scope.row.orderStatus == 2" title="确定出库吗？" link type="danger"
+                     size="small" @click="handleSend(scope.row.orderId)">出库
+          </el-button>
+
+          <el-button v-if="!(scope.row.orderStatus == 4 || scope.row.orderStatus < 0)" link type="danger"
+                     size="small" @click="handleClose(scope.row.orderId)">关闭订单
+          </el-button>
+
+          <el-button link type="primary" size="small"
+                     @click="() => router.push({ path: '/order_detail', query: { id: scope.row.orderId } })">订单详情
+          </el-button>
+          <!--          <router-link :to="{ path: '/order_detail', query: { id: scope.row.orderId } }">订单详情</router-link>-->
         </template>
       </el-table-column>
     </el-table>
@@ -66,9 +63,12 @@
 
 <script setup>
 import {onMounted, reactive} from 'vue'
-import {ElMessage} from 'element-plus'
+import {ElMessage, ElMessageBox} from 'element-plus'
 import {Delete, HomeFilled} from '@element-plus/icons-vue'
 import axiosInstance from '../../../utils/http/axios.js'
+import {useRouter} from 'vue-router'
+
+const router = useRouter();
 
 const state = reactive({
   loading: false,
@@ -157,47 +157,90 @@ const changePage = (val) => {
   state.currentPage = val
   getOrderList()
 }
+
 // 配货方法
 const handleConfig = (id) => {
-  let params
+  let params;
   // 当个配置
   if (id) {
-    params = [id]
+    params = [id];
   } else {
     if (!state.multipleSelection.length) {
-      console.log('state.multipleSelection', state.multipleSelection.length)
-      ElMessage.error('请选择项')
-      return
+      console.log('state.multipleSelection', state.multipleSelection.length);
+      ElMessage.error('请选择项');
+      return;
     }
     // 多选配置
-    params = state.multipleSelection.map(i => i.orderId)
+    params = state.multipleSelection.map(i => i.orderId);
   }
-  axiosInstance.put('/orders/checkDone', {
-    ids: params
-  }).then(() => {
-    ElMessage.success('配货成功')
-    getOrderList()
+
+  ElMessageBox.confirm(
+      '确定配货完成吗？',
+      {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }
+  ).then(async () => {
+    const res = await axiosInstance.put('/orders/checkDone', {
+      ids: params
+    });
+
+    if (res.resultCode === 200) {
+      ElMessage.success("配货完成成功");
+      getOrderList()
+    } else {
+      ElMessage.error("配货完成失败")
+    }
+
+  }).catch(() => {
+    ElMessage({
+      type: 'info',
+      message: '取消配货完成',
+    })
   })
 }
+
 // 出库方法
 const handleSend = (id) => {
-  let params
+  let params;
   if (id) {
-    params = [id]
+    params = [id];
   } else {
     if (!state.multipleSelection.length) {
-      ElMessage.error('请选择项')
-      return
+      ElMessage.error('请选择项');
+      return;
     }
-    params = state.multipleSelection.map(i => i.orderId)
+    params = state.multipleSelection.map(i => i.orderId);
   }
-  axiosInstance.put('/orders/checkOut', {
-    ids: params
-  }).then(() => {
-    ElMessage.success('出库成功')
-    getOrderList()
+
+  ElMessageBox.confirm(
+      '确定出库吗？',
+      {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }
+  ).then(async () => {
+    const res = await axiosInstance.put('/orders/checkOut', {
+      ids: params
+    });
+
+    if (res.resultCode === 200) {
+      ElMessage.success("出库成功");
+      getOrderList()
+    } else {
+      ElMessage.error("出库失败")
+    }
+
+  }).catch(() => {
+    ElMessage({
+      type: 'info',
+      message: '取消出库',
+    })
   })
 }
+
 // 关闭订单方法
 const handleClose = (id) => {
   let params;
@@ -205,16 +248,36 @@ const handleClose = (id) => {
     params = [id]
   } else {
     if (!state.multipleSelection.length) {
-      ElMessage.error('请选择项')
-      return
+      ElMessage.error('请选择项');
+      return;
     }
-    params = state.multipleSelection.map(i => i.orderId)
+    params = state.multipleSelection.map(i => i.orderId);
   }
-  axiosInstance.put('/orders/close', {
-    ids: params
-  }).then(() => {
-    ElMessage.success('关闭成功')
-    getOrderList()
+
+  ElMessageBox.confirm(
+      '确定关闭订单吗？',
+      {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }
+  ).then(async () => {
+    const res = await axiosInstance.put('/orders/close', {
+      ids: params
+    });
+
+    if (res.resultCode === 200) {
+      ElMessage.success("关闭成功");
+      getOrderList()
+    } else {
+      ElMessage.error("关闭失败")
+    }
+
+  }).catch(() => {
+    ElMessage({
+      type: 'info',
+      message: '取消关闭',
+    })
   })
 }
 </script>
