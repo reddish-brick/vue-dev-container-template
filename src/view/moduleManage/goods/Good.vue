@@ -36,17 +36,14 @@
       </el-table-column>
       <el-table-column
           prop="stockNum"
-          label="商品库存"
-      >
+          label="商品库存">
       </el-table-column>
       <el-table-column
           prop="sellingPrice"
-          label="商品售价"
-      >
+          label="商品售价">
       </el-table-column>
       <el-table-column
-          label="上架状态"
-      >
+          label="上架状态">
         <template #default="scope">
           <span style="color: green;" v-if="scope.row.goodsSellStatus == 0">销售中</span>
           <span style="color: red;" v-else>已下架</span>
@@ -55,8 +52,7 @@
 
       <el-table-column
           label="操作"
-          width="100"
-      >
+          width="100">
         <template #default="scope">
           <el-button link type="primary" size="small" @click="handleEdit(scope.row.goodsId)">修改
           </el-button>
@@ -64,6 +60,7 @@
           <el-button link type="primary" v-if="scope.row.goodsSellStatus == 0" size="small"
                      @click="handleStatus(scope.row.goodsId, 1)">下架
           </el-button>
+
           <el-button link type="primary" v-else size="small" @click="handleStatus(scope.row.goodsId, 0)">上架
           </el-button>
         </template>

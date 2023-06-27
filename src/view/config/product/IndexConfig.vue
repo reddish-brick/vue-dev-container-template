@@ -3,16 +3,7 @@
     <template #header>
       <div class="header">
         <el-button type="primary" :icon="Plus" @click="handleAdd">增加</el-button>
-        <el-popconfirm
-            title="确定删除吗？"
-            confirmButtonText='确定'
-            cancelButtonText='取消'
-            @confirm="handleDelete"
-        >
-          <template #reference>
-            <el-button type="danger" :icon="Delete">批量删除</el-button>
-          </template>
-        </el-popconfirm>
+        <el-button type="danger" :icon="Delete" @click="handleDelete">批量删除</el-button>
       </div>
     </template>
     <el-table
@@ -31,9 +22,7 @@
           label="商品名称"
       >
       </el-table-column>
-      <el-table-column
-          label="跳转链接"
-      >
+      <el-table-column label="跳转链接">
         <template #default="scope">
           <a target="_blank" :href="scope.row.redirectUrl">{{ scope.row.redirectUrl }}</a>
         </template>
@@ -41,14 +30,12 @@
       <el-table-column
           prop="configRank"
           label="排序值"
-          width="120"
-      >
+          width="120">
       </el-table-column>
       <el-table-column
           prop="goodsId"
           label="商品编号"
-          width="200"
-      >
+          width="100">
       </el-table-column>
       <el-table-column
           prop="createTime"
@@ -58,18 +45,20 @@
       </el-table-column>
       <el-table-column
           label="操作"
-          width="100">
+          width="140">
         <template #default="scope">
-          <a style="cursor: pointer; margin-right: 10px" @click="handleEdit(scope.row.configId)">修改</a>
-          <el-popconfirm
-              title="确定删除吗？"
-              confirmButtonText='确定'
-              cancelButtonText='取消'
-              @confirm="handleDeleteOne(scope.row.configId)">
-            <template #reference>
-              <a style="cursor: pointer">删除</a>
-            </template>
-          </el-popconfirm>
+          <!--          <a style="cursor: pointer; margin-right: 10px" @click="handleEdit(scope.row.configId)">修改</a>-->
+          <!--          <el-popconfirm-->
+          <!--              title="确定删除吗？"-->
+          <!--              confirmButtonText='确定'-->
+          <!--              cancelButtonText='取消'-->
+          <!--              @confirm="handleDeleteOne(scope.row.configId)">-->
+          <!--            <template #reference>-->
+          <!--              <a style="cursor: pointer">删除</a>-->
+          <!--            </template>-->
+          <!--          </el-popconfirm>-->
+          <el-button link type="danger" size="small" @click="handleDeleteOne(scope.row.configId)">删除</el-button>
+          <el-button link type="primary" size="small" @click="handleEdit(scope.row.configId)">编辑</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -84,7 +73,7 @@
 
 <script setup>
 import {onMounted, reactive, ref} from 'vue'
-import {ElMessage} from 'element-plus'
+import {ElMessage, ElMessageBox} from 'element-plus'
 import {Delete, Plus} from '@element-plus/icons-vue'
 import DialogAddGood from '../product/DialogAddGood.vue'
 import {useRoute, useRouter} from 'vue-router'
@@ -159,31 +148,69 @@ const handleEdit = (id) => {
 const handleSelectionChange = (val) => {
   state.multipleSelection = val
 }
+
 // 删除
 const handleDelete = () => {
   if (!state.multipleSelection.length) {
-    ElMessage.error('请选择项')
-    return
+    ElMessage.error('请选择项');
+    return;
   }
-  axiosInstance.delete('/indexConfigs', {
-    data: {
-      ids: state.multipleSelection.map(i => i.configId)
+
+  ElMessageBox.confirm(
+      '确定要删除吗?',
+      {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }
+  ).then(async () => {
+    const res = await axiosInstance.delete('/indexConfigs', {
+      data: {
+        ids: state.multipleSelection.map(i => i.configId)
+      }
+    });
+
+    if (res.resultCode === 200) {
+      ElMessage.success("删除成功");
+      getIndexConfig();
+    } else {
+      ElMessage.error("删除失败")
     }
-  }).then(() => {
-    ElMessage.success('删除成功')
-    getIndexConfig()
+  }).catch(() => {
+    ElMessage({
+      type: 'info',
+      message: '取消删除',
+    })
   })
 }
 
 // 单个删除
 const handleDeleteOne = (id) => {
-  axiosInstance.delete('/indexConfigs', {
-    data: {
-      ids: [id]
+  ElMessageBox.confirm(
+      '确定要删除吗?',
+      {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }
+  ).then(async () => {
+    const res = await axiosInstance.delete('/indexConfigs', {
+      data: {
+        ids: [id]
+      }
+    });
+
+    if (res.resultCode === 200) {
+      ElMessage.success("删除成功");
+      getIndexConfig();
+    } else {
+      ElMessage.error("删除失败")
     }
-  }).then(() => {
-    ElMessage.success('删除成功')
-    getIndexConfig()
+  }).catch(() => {
+    ElMessage({
+      type: 'info',
+      message: '取消删除',
+    })
   })
 }
 
