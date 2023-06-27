@@ -3,15 +3,7 @@
     <template #header>
       <div class="header">
         <el-button type="primary" :icon="Plus" @click="handleAdd">增加</el-button>
-        <el-popconfirm
-            title="确定删除吗？"
-            confirmButtonText='确定'
-            cancelButtonText='取消'
-            @confirm="handleDelete">
-          <template #reference>
-            <el-button type="danger" :icon="Delete">批量删除</el-button>
-          </template>
-        </el-popconfirm>
+        <el-button type="danger" :icon="Delete" @click="handleDelete">批量删除</el-button>
       </div>
     </template>
     <el-table
@@ -45,8 +37,7 @@
       </el-table-column>
       <el-table-column
           label="操作"
-          width="220"
-      >
+          width="220">
         <template #default="scope">
           <el-button link type="primary" size="small" @click="handleEdit(scope.row.categoryId)">修改
           </el-button>
@@ -167,20 +158,43 @@ const handleEdit = (id) => {
 const handleSelectionChange = (val) => {
   state.multipleSelection = val
 }
+
 // 批量删除
 const handleDelete = () => {
   if (!state.multipleSelection.length) {
-    ElMessage.error('请选择项')
-    return
+    ElMessage.error('请选择项');
+    return;
   }
-  axiosInstance.delete('/categories', {
-    data: {
-      ids: state.multipleSelection.map(i => i.categoryId)
+
+  ElMessageBox.confirm(
+      '确定删除吗?',
+      {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }
+  ).then(async () => {
+    const res = await axiosInstance.delete('/categories', {
+      data: {
+        ids: state.multipleSelection.map(i => i.categoryId)
+      }
+    });
+
+    if (res.resultCode === 200) {
+      ElMessage.success("删除成功");
+      getCategory();
+    } else {
+      ElMessage.error("删除失败")
     }
-  }).then(() => {
-    ElMessage.success('删除成功')
-    getCategory()
+
+  }).catch(() => {
+    ElMessage({
+      type: 'info',
+      message: '取消删除',
+    })
   })
+
+
 }
 
 // 单个删除

@@ -9,7 +9,7 @@
             </el-icon>
           </p>
           <p style="float: left;font-size: 25px; font-weight: bold">
-            欢迎来到我的网站
+            欢迎来到红砖后台管理系统
           </p>
         </div>
 
